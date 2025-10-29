@@ -12,167 +12,518 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
-            background: #0a0a0f;
-            color: #ffffff;
+            font-family: 'gg sans', 'Noto Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            background: #313338;
+            color: #dbdee1;
             min-height: 100vh;
-            position: relative;
-            overflow-x: hidden;
         }
 
-        body::before {
-            content: '';
+        .top-nav {
+            background: #1e1f22;
+            border-bottom: 1px solid #1e1f22;
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .bot-logo {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #5865f2, #7289da);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: white;
+        }
+
+        .nav-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #f2f3f5;
+        }
+
+        .search-button {
+            background: #2b2d31;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 4px;
+            color: #b5bac1;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            transition: background 0.2s;
+        }
+
+        .search-button:hover {
+            background: #35373c;
+        }
+
+        .container {
+            max-width: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        .home-screen {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: calc(100vh - 57px);
+            padding: 40px 20px;
+        }
+
+        .home-content {
+            text-align: center;
+            max-width: 440px;
+        }
+
+        .home-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #5865f2, #7289da);
+            margin: 0 auto 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 36px;
+            font-weight: 700;
+            color: white;
+        }
+
+        .home-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: #f2f3f5;
+            margin-bottom: 8px;
+        }
+
+        .home-subtitle {
+            font-size: 16px;
+            color: #b5bac1;
+            margin-bottom: 32px;
+            line-height: 1.5;
+        }
+
+        .search-container {
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        .search-input-wrapper {
+            position: relative;
+            width: 100%;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 12px 16px;
+            background: #1e1f22;
+            border: 1px solid #1e1f22;
+            border-radius: 8px;
+            color: #dbdee1;
+            font-size: 16px;
+            font-family: inherit;
+            transition: border-color 0.2s;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: #5865f2;
+        }
+
+        .search-input::placeholder {
+            color: #6d6f78;
+        }
+
+        .quick-actions {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .quick-btn {
+            padding: 10px 20px;
+            background: #5865f2;
+            border: none;
+            border-radius: 4px;
+            color: white;
+            font-weight: 500;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .quick-btn:hover {
+            background: #4752c4;
+        }
+
+        .quick-btn.secondary {
+            background: #4e5058;
+        }
+
+        .quick-btn.secondary:hover {
+            background: #6d6f78;
+        }
+
+        .search-modal {
+            display: none;
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            background: 
-                radial-gradient(circle at 10% 20%, rgba(88, 101, 242, 0.08) 0%, transparent 50%),
-                radial-gradient(circle at 90% 80%, rgba(114, 137, 218, 0.06) 0%, transparent 50%);
-            pointer-events: none;
-            z-index: 0;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 2000;
+            align-items: flex-start;
+            justify-content: center;
+            padding-top: 100px;
         }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 40px 20px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .header {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-
-        .header h1 {
-            font-size: 2.5em;
-            font-weight: 700;
-            background: linear-gradient(135deg, #5865F2 0%, #7289DA 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 8px;
-            letter-spacing: -0.5px;
-        }
-
-        .header p {
-            color: #a0a0a8;
-            font-size: 1em;
-            font-weight: 400;
-        }
-
-        .search-section {
-            background: rgba(24, 24, 31, 0.6);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(88, 101, 242, 0.1);
-            border-radius: 16px;
-            padding: 28px;
-            margin-bottom: 32px;
-            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
-        }
-
-        .search-box {
+        .search-modal.active {
             display: flex;
-            gap: 12px;
-            margin-bottom: 16px;
         }
 
-        .search-box input {
-            flex: 1;
-            padding: 14px 18px;
-            background: rgba(15, 15, 20, 0.8);
-            border: 1px solid rgba(88, 101, 242, 0.15);
-            border-radius: 10px;
-            color: #ffffff;
-            font-size: 0.95em;
-            transition: all 0.3s ease;
-            font-family: 'SF Mono', 'Monaco', 'Courier New', monospace;
+        .search-modal-content {
+            background: #313338;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 440px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
         }
 
-        .search-box input:focus {
-            outline: none;
-            border-color: #5865F2;
-            box-shadow: 0 0 0 3px rgba(88, 101, 242, 0.1);
-            background: rgba(15, 15, 20, 0.95);
-        }
-
-        .search-box input::placeholder {
-            color: #6b6b7a;
-        }
-
-        .search-box button {
-            padding: 14px 28px;
-            background: linear-gradient(135deg, #5865F2 0%, #4752C4 100%);
+        .search-modal-input {
+            width: 100%;
+            padding: 16px;
+            background: #1e1f22;
             border: none;
-            border-radius: 10px;
-            color: white;
-            font-weight: 600;
-            font-size: 0.95em;
+            border-radius: 8px 8px 0 0;
+            color: #dbdee1;
+            font-size: 16px;
+            font-family: inherit;
+        }
+
+        .search-modal-input:focus {
+            outline: none;
+        }
+
+        .search-modal-input::placeholder {
+            color: #6d6f78;
+        }
+
+        .search-options {
+            padding: 12px;
+        }
+
+        .search-option {
+            padding: 12px;
+            border-radius: 4px;
             cursor: pointer;
-            transition: all 0.3s ease;
-            white-space: nowrap;
+            transition: background 0.2s;
+            margin-bottom: 4px;
         }
 
-        .search-box button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(88, 101, 242, 0.4);
+        .search-option:hover {
+            background: #2b2d31;
         }
 
-        .search-box button:active {
-            transform: translateY(0);
+        .option-title {
+            color: #f2f3f5;
+            font-weight: 500;
+            margin-bottom: 4px;
         }
 
-        .quick-examples {
+        .option-desc {
+            color: #b5bac1;
+            font-size: 12px;
+        }
+
+        .profile-view {
+            display: none;
+        }
+
+        .profile-view.active {
+            display: block;
+        }
+
+        .profile-container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .profile-banner-section {
+            position: relative;
+            height: 240px;
+            background: linear-gradient(135deg, #5865f2 0%, #7289da 100%);
+        }
+
+        .profile-banner-section.has-banner {
+            background-size: cover;
+            background-position: center;
+        }
+
+        .profile-content-wrapper {
+            background: #111214;
+            border-radius: 8px 8px 0 0;
+            margin-top: -60px;
+            position: relative;
+            padding: 16px;
+        }
+
+        .profile-header {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 12px;
+            position: relative;
+        }
+
+        .avatar-container {
+            position: relative;
+            margin-top: -70px;
+            margin-right: 16px;
+        }
+
+        .profile-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 8px solid #111214;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+        }
+
+        .status-badge {
+            position: absolute;
+            bottom: 8px;
+            right: 8px;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            border: 6px solid #111214;
+            background: #23a559;
+        }
+
+        .status-idle { background: #f0b232; }
+        .status-dnd { background: #f23f43; }
+        .status-offline { background: #80848e; }
+
+        .profile-info {
+            flex: 1;
+            padding-top: 16px;
+        }
+
+        .username-section {
+            margin-bottom: 12px;
+        }
+
+        .display-name {
+            font-size: 20px;
+            font-weight: 600;
+            color: #f2f3f5;
+            margin-bottom: 2px;
+        }
+
+        .username-tag {
+            font-size: 14px;
+            color: #b5bac1;
+        }
+
+        .profile-badges {
             display: flex;
             gap: 8px;
             flex-wrap: wrap;
-            align-items: center;
+            margin-bottom: 12px;
         }
 
-        .quick-examples span {
-            color: #8e8e9e;
-            font-size: 0.85em;
-            margin-right: 8px;
-        }
-
-        .example-btn {
-            padding: 7px 14px;
-            background: rgba(88, 101, 242, 0.08);
-            border: 1px solid rgba(88, 101, 242, 0.2);
-            border-radius: 8px;
-            color: #b9bbbe;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 0.85em;
-        }
-
-        .example-btn:hover {
-            background: rgba(88, 101, 242, 0.15);
-            border-color: #5865F2;
-            color: #ffffff;
-            transform: translateY(-1px);
-        }
-
-        .loading {
-            text-align: center;
-            color: #b9bbbe;
-            font-size: 1.1em;
-            margin: 60px 0;
+        .profile-badge {
+            width: 22px;
+            height: 22px;
             display: flex;
             align-items: center;
             justify-content: center;
+        }
+
+        .profile-badge img {
+            width: 100%;
+            height: 100%;
+        }
+
+        .divider {
+            height: 1px;
+            background: #3f4147;
+            margin: 16px 0;
+        }
+
+        .section-title {
+            font-size: 12px;
+            font-weight: 700;
+            color: #b5bac1;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+            letter-spacing: 0.5px;
+        }
+
+        .bio-box {
+            background: #2b2d31;
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 16px;
+            color: #dbdee1;
+            line-height: 1.5;
+            font-size: 14px;
+        }
+
+        .bio-box img {
+            width: 20px;
+            height: 20px;
+            vertical-align: middle;
+        }
+
+        .info-rows {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px;
+            background: #2b2d31;
+            border-radius: 8px;
+        }
+
+        .info-label {
+            font-size: 14px;
+            color: #b5bac1;
+            font-weight: 500;
+        }
+
+        .info-value {
+            font-size: 14px;
+            color: #f2f3f5;
+            font-weight: 600;
+        }
+
+        .tag-container {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .status-tag {
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .tag-premium {
+            background: rgba(88, 101, 242, 0.15);
+            color: #5865f2;
+        }
+
+        .tag-blacklist {
+            background: rgba(242, 63, 67, 0.15);
+            color: #f23f43;
+        }
+
+        .tag-bot {
+            background: rgba(88, 101, 242, 0.15);
+            color: #5865f2;
+        }
+
+        .tag-active {
+            background: rgba(35, 165, 89, 0.15);
+            color: #23a559;
+        }
+
+        .guilds-section {
+            margin-top: 16px;
+        }
+
+        .guilds-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 12px;
+        }
+
+        .guild-item {
+            background: #2b2d31;
+            border-radius: 8px;
+            padding: 12px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: background 0.2s;
+            cursor: pointer;
+        }
+
+        .guild-item:hover {
+            background: #35373c;
+        }
+
+        .guild-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .guild-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .guild-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: #f2f3f5;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .guild-id {
+            font-size: 12px;
+            color: #6d6f78;
+        }
+
+        .loading {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: calc(100vh - 57px);
+            color: #b5bac1;
+            font-size: 16px;
             gap: 12px;
         }
 
         .loading::before {
             content: '';
-            width: 20px;
-            height: 20px;
-            border: 3px solid rgba(88, 101, 242, 0.2);
-            border-top-color: #5865F2;
+            width: 24px;
+            height: 24px;
+            border: 3px solid #2b2d31;
+            border-top-color: #5865f2;
             border-radius: 50%;
             animation: spin 1s linear infinite;
         }
@@ -181,1006 +532,333 @@
             to { transform: rotate(360deg); }
         }
 
-        .error {
-            background: rgba(237, 66, 69, 0.08);
-            border: 1px solid rgba(237, 66, 69, 0.2);
-            border-radius: 12px;
-            padding: 20px;
-            color: #ed4245;
+        .error-screen {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: calc(100vh - 57px);
+            padding: 40px 20px;
             text-align: center;
-            margin: 20px 0;
         }
 
-        .profile-card {
-            background: rgba(24, 24, 31, 0.6);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(88, 101, 242, 0.1);
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-        }
-
-        .profile-banner {
-            height: 200px;
-            background: linear-gradient(135deg, #5865F2 0%, #7289DA 100%);
-            position: relative;
-        }
-
-        .profile-content {
-            padding: 0 32px 32px;
-            position: relative;
-        }
-
-        .avatar-section {
-            display: flex;
-            align-items: flex-end;
-            gap: 24px;
-            margin-top: -60px;
-            margin-bottom: 28px;
-        }
-
-        .avatar-wrapper {
-            position: relative;
-        }
-
-        .avatar {
-            width: 128px;
-            height: 128px;
-            border-radius: 50%;
-            border: 6px solid #18181f;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
-            object-fit: cover;
-        }
-
-        .status-indicator {
-            position: absolute;
-            bottom: 8px;
-            right: 8px;
-            width: 28px;
-            height: 28px;
-            border-radius: 50%;
-            border: 5px solid #18181f;
-        }
-
-        .status-online { background: #3ba55d; }
-        .status-idle { background: #faa81a; }
-        .status-dnd { background: #ed4245; }
-        .status-offline { background: #747f8d; }
-
-        .user-info {
-            flex: 1;
-            padding-bottom: 18px;
-        }
-
-        .username {
-            font-size: 1.8em;
-            font-weight: 700;
-            margin-bottom: 6px;
-            color: #ffffff;
-            letter-spacing: -0.3px;
-        }
-
-        .user-id {
-            color: #8e8e9e;
-            font-size: 0.9em;
+        .error-icon {
+            font-size: 48px;
             margin-bottom: 16px;
-            font-family: 'SF Mono', 'Monaco', monospace;
         }
 
-        .badges {
-            display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
-        }
-
-        .badge {
-            background: rgba(88, 101, 242, 0.08);
-            padding: 8px 14px;
-            border-radius: 8px;
-            color: #ffffff;
-            font-size: 0.85em;
-            border: 1px solid rgba(88, 101, 242, 0.2);
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            transition: all 0.3s ease;
-            font-weight: 500;
-        }
-
-        .badge:hover {
-            background: rgba(88, 101, 242, 0.15);
-            border-color: rgba(88, 101, 242, 0.4);
-            transform: translateY(-1px);
-        }
-
-        .badge-emoji {
-            font-size: 1.1em;
-        }
-
-        .badge-emoji img {
-            width: 18px;
-            height: 18px;
-            vertical-align: middle;
-        }
-
-        .bio-section {
-            background: rgba(15, 15, 20, 0.6);
-            border: 1px solid rgba(88, 101, 242, 0.1);
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 28px;
-        }
-
-        .bio-section h3 {
-            color: #ffffff;
-            margin-bottom: 12px;
-            font-size: 1em;
+        .error-title {
+            font-size: 20px;
             font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .bio-section h3::before {
-            content: '';
-            width: 3px;
-            height: 16px;
-            background: linear-gradient(135deg, #5865F2, #7289DA);
-            border-radius: 2px;
-        }
-
-        .bio-text {
-            color: #b9bbbe;
-            line-height: 1.6;
-            font-size: 0.95em;
-        }
-
-        .bio-text img {
-            width: 18px;
-            height: 18px;
-            vertical-align: middle;
-            margin: 0 2px;
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 14px;
-            margin-bottom: 28px;
-        }
-
-        .stat-card {
-            background: rgba(15, 15, 20, 0.6);
-            border: 1px solid rgba(88, 101, 242, 0.1);
-            border-radius: 12px;
-            padding: 20px;
-            transition: all 0.3s ease;
-        }
-
-        .stat-card:hover {
-            border-color: rgba(88, 101, 242, 0.3);
-            transform: translateY(-2px);
-        }
-
-        .stat-label {
-            color: #8e8e9e;
-            font-size: 0.8em;
+            color: #f2f3f5;
             margin-bottom: 8px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            font-weight: 600;
         }
 
-        .stat-value {
-            color: #ffffff;
-            font-size: 1.6em;
-            font-weight: 700;
+        .error-message {
+            font-size: 14px;
+            color: #b5bac1;
+            margin-bottom: 24px;
         }
 
-        .guilds-section {
-            margin-top: 32px;
-        }
-
-        .section-title {
-            color: #ffffff;
-            font-size: 1.3em;
-            margin-bottom: 20px;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .section-title::before {
-            content: '';
-            width: 3px;
-            height: 22px;
-            background: linear-gradient(135deg, #5865F2, #7289DA);
-            border-radius: 2px;
-        }
-
-        .guilds-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-            gap: 14px;
-        }
-
-        .guild-card {
-            background: rgba(15, 15, 20, 0.6);
-            border: 1px solid rgba(88, 101, 242, 0.1);
-            border-radius: 12px;
-            padding: 18px;
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-
-        .guild-card:hover {
-            border-color: rgba(88, 101, 242, 0.3);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(88, 101, 242, 0.15);
-        }
-
-        .guild-icon {
-            width: 56px;
-            height: 56px;
-            border-radius: 14px;
-            margin-bottom: 14px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-        }
-
-        .guild-name {
-            color: #ffffff;
-            font-size: 1em;
-            font-weight: 600;
-            margin-bottom: 6px;
-        }
-
-        .guild-id {
-            color: #6b6b7a;
-            font-size: 0.8em;
-            font-family: 'SF Mono', 'Monaco', monospace;
-        }
-
-        .feature-tag {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            padding: 8px 14px;
-            border-radius: 8px;
-            font-size: 0.85em;
-            font-weight: 600;
-            border: 1px solid;
-        }
-
-        .noprefix-indicator {
-            background: rgba(59, 165, 93, 0.08);
-            border-color: rgba(59, 165, 93, 0.2);
-            color: #3ba55d;
-        }
-
-        .blacklisted-indicator {
-            background: rgba(237, 66, 69, 0.08);
-            border-color: rgba(237, 66, 69, 0.2);
-            color: #ed4245;
-        }
-
-        .bot-indicator {
-            background: rgba(88, 101, 242, 0.08);
-            border-color: rgba(88, 101, 242, 0.2);
-            color: #5865F2;
-        }
-
-        .share-section {
-            margin-top: 24px;
-            padding: 18px;
-            background: rgba(15, 15, 20, 0.6);
-            border: 1px solid rgba(88, 101, 242, 0.1);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 16px;
-        }
-
-        .share-label {
-            color: #8e8e9e;
-            font-size: 0.9em;
-            font-weight: 500;
-        }
-
-        .share-url {
-            flex: 1;
-            padding: 10px 14px;
-            background: rgba(15, 15, 20, 0.8);
-            border: 1px solid rgba(88, 101, 242, 0.15);
-            border-radius: 8px;
-            color: #b9bbbe;
-            font-size: 0.85em;
-            font-family: 'SF Mono', 'Monaco', monospace;
-            user-select: all;
-        }
-
-        .copy-btn {
+        .back-button {
             padding: 10px 20px;
-            background: rgba(88, 101, 242, 0.1);
-            border: 1px solid rgba(88, 101, 242, 0.3);
-            border-radius: 8px;
-            color: #5865F2;
-            font-weight: 600;
+            background: #5865f2;
+            border: none;
+            border-radius: 4px;
+            color: white;
+            font-weight: 500;
+            font-size: 14px;
             cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 0.85em;
+            transition: background 0.2s;
         }
 
-        .copy-btn:hover {
-            background: rgba(88, 101, 242, 0.2);
-            transform: translateY(-1px);
-        }
-
-        .copy-btn.copied {
-            background: rgba(59, 165, 93, 0.1);
-            border-color: rgba(59, 165, 93, 0.3);
-            color: #3ba55d;
-        }
-
-        @media (max-width: 1024px) {
-            .container {
-                padding: 32px 20px;
-            }
-
-            .stats-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .guilds-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
+        .back-button:hover {
+            background: #4752c4;
         }
 
         @media (max-width: 768px) {
-            .container {
-                padding: 20px 16px;
+            .profile-banner-section {
+                height: 180px;
             }
 
-            .header {
-                margin-bottom: 28px;
+            .profile-avatar {
+                width: 90px;
+                height: 90px;
+                border-width: 6px;
             }
 
-            .header h1 {
-                font-size: 2em;
-            }
-
-            .header p {
-                font-size: 0.9em;
-            }
-
-            .search-section {
-                padding: 20px 16px;
-                margin-bottom: 24px;
-            }
-
-            .search-box {
-                flex-direction: column;
-                gap: 10px;
-            }
-
-            .search-box input {
-                padding: 13px 16px;
-                font-size: 0.9em;
-            }
-
-            .search-box button {
-                width: 100%;
-                padding: 13px 24px;
-            }
-
-            .quick-examples {
-                gap: 6px;
-            }
-
-            .example-btn {
-                font-size: 0.8em;
-                padding: 6px 12px;
-            }
-
-            .profile-banner {
-                height: 160px;
-            }
-
-            .profile-content {
-                padding: 0 16px 24px;
-            }
-
-            .avatar-section {
-                flex-direction: column;
-                align-items: center;
-                text-align: center;
-                margin-top: -50px;
-                margin-bottom: 20px;
-                gap: 16px;
-            }
-
-            .avatar {
-                width: 100px;
-                height: 100px;
+            .status-badge {
+                width: 22px;
+                height: 22px;
                 border-width: 5px;
             }
 
-            .status-indicator {
-                width: 24px;
-                height: 24px;
-                border-width: 4px;
-                bottom: 6px;
-                right: 6px;
+            .avatar-container {
+                margin-top: -50px;
             }
 
-            .username {
-                font-size: 1.5em;
-            }
-
-            .user-id {
-                font-size: 0.85em;
-                margin-bottom: 12px;
-            }
-
-            .badges {
-                justify-content: center;
-                gap: 6px;
-            }
-
-            .badge {
-                font-size: 0.8em;
-                padding: 7px 12px;
-            }
-
-            .badge-emoji img {
-                width: 16px;
-                height: 16px;
-            }
-
-            .bio-section {
-                padding: 16px;
-                margin-bottom: 20px;
-            }
-
-            .bio-section h3 {
-                font-size: 0.95em;
-            }
-
-            .bio-text {
-                font-size: 0.9em;
-            }
-
-            .bio-text img {
-                width: 16px;
-                height: 16px;
-            }
-
-            .stats-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 10px;
-                margin-bottom: 20px;
-            }
-
-            .stat-card {
-                padding: 16px;
-            }
-
-            .stat-label {
-                font-size: 0.75em;
-            }
-
-            .stat-value {
-                font-size: 1.4em;
-            }
-
-            .share-section {
-                flex-direction: column;
-                align-items: stretch;
-                padding: 14px;
-                gap: 10px;
-                margin-top: 20px;
-            }
-
-            .share-label {
-                font-size: 0.85em;
-            }
-
-            .share-url {
-                width: 100%;
-                overflow-x: auto;
-                white-space: nowrap;
-                padding: 9px 12px;
-                font-size: 0.8em;
-            }
-
-            .copy-btn {
-                width: 100%;
-                padding: 9px 18px;
-            }
-
-            .guilds-section {
-                margin-top: 24px;
-            }
-
-            .section-title {
-                font-size: 1.15em;
-                margin-bottom: 16px;
-            }
-
-            .section-title::before {
-                height: 18px;
+            .display-name {
+                font-size: 18px;
             }
 
             .guilds-grid {
                 grid-template-columns: 1fr;
-                gap: 10px;
-            }
-
-            .guild-card {
-                padding: 14px;
-            }
-
-            .guild-icon {
-                width: 48px;
-                height: 48px;
-                border-radius: 12px;
-                margin-bottom: 10px;
-            }
-
-            .guild-name {
-                font-size: 0.95em;
-            }
-
-            .guild-id {
-                font-size: 0.75em;
-            }
-
-            .feature-tag {
-                font-size: 0.8em;
-                padding: 7px 12px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .container {
-                padding: 16px 12px;
-            }
-
-            .header h1 {
-                font-size: 1.6em;
-                letter-spacing: -0.3px;
-            }
-
-            .header p {
-                font-size: 0.85em;
-            }
-
-            .search-section {
-                padding: 16px 12px;
-            }
-
-            .search-box input {
-                padding: 12px 14px;
-                font-size: 0.85em;
-            }
-
-            .search-box button {
-                padding: 12px 20px;
-                font-size: 0.9em;
-            }
-
-            .quick-examples span {
-                font-size: 0.8em;
-            }
-
-            .example-btn {
-                font-size: 0.75em;
-                padding: 5px 10px;
-            }
-
-            .profile-banner {
-                height: 140px;
-            }
-
-            .profile-content {
-                padding: 0 12px 20px;
-            }
-
-            .avatar-section {
-                margin-top: -45px;
-            }
-
-            .avatar {
-                width: 90px;
-                height: 90px;
-                border-width: 4px;
-            }
-
-            .status-indicator {
-                width: 20px;
-                height: 20px;
-                border-width: 3px;
-                bottom: 4px;
-                right: 4px;
-            }
-
-            .username {
-                font-size: 1.3em;
-            }
-
-            .user-id {
-                font-size: 0.8em;
-            }
-
-            .badge {
-                font-size: 0.75em;
-                padding: 6px 10px;
-            }
-
-            .badge-emoji img {
-                width: 14px;
-                height: 14px;
-            }
-
-            .bio-section {
-                padding: 14px;
-            }
-
-            .bio-section h3 {
-                font-size: 0.9em;
-            }
-
-            .bio-text {
-                font-size: 0.85em;
-            }
-
-            .bio-text img {
-                width: 14px;
-                height: 14px;
-            }
-
-            .stats-grid {
-                grid-template-columns: 1fr;
-                gap: 8px;
-            }
-
-            .stat-card {
-                padding: 14px;
-            }
-
-            .stat-label {
-                font-size: 0.7em;
-            }
-
-            .stat-value {
-                font-size: 1.3em;
-            }
-
-            .share-section {
-                padding: 12px;
-            }
-
-            .share-label {
-                font-size: 0.8em;
-            }
-
-            .share-url {
-                padding: 8px 10px;
-                font-size: 0.75em;
-            }
-
-            .copy-btn {
-                padding: 8px 16px;
-                font-size: 0.8em;
-            }
-
-            .section-title {
-                font-size: 1.05em;
-            }
-
-            .guild-card {
-                padding: 12px;
-            }
-
-            .guild-icon {
-                width: 44px;
-                height: 44px;
-                border-radius: 10px;
-            }
-
-            .guild-name {
-                font-size: 0.9em;
-            }
-
-            .guild-id {
-                font-size: 0.7em;
-            }
-
-            .feature-tag {
-                font-size: 0.75em;
-                padding: 6px 10px;
-            }
-
-            .loading {
-                font-size: 1em;
-                margin: 40px 0;
-            }
-
-            .loading::before {
-                width: 18px;
-                height: 18px;
-                border-width: 2px;
-            }
-
-            .error {
-                padding: 16px;
-                font-size: 0.9em;
-            }
-        }
-
-        @media (max-width: 360px) {
-            .container {
-                padding: 12px 10px;
-            }
-
-            .header h1 {
-                font-size: 1.4em;
-            }
-
-            .header p {
-                font-size: 0.8em;
-            }
-
-            .search-section {
-                padding: 14px 10px;
-            }
-
-            .avatar {
-                width: 80px;
-                height: 80px;
-            }
-
-            .username {
-                font-size: 1.2em;
-            }
-
-            .stats-grid {
-                gap: 6px;
-            }
-
-            .stat-card {
-                padding: 12px;
-            }
-
-            .guild-icon {
-                width: 40px;
-                height: 40px;
             }
         }
     </style>
 </head>
 <body>
+    <div class="top-nav">
+        <div class="nav-left">
+            <div class="bot-logo">Z</div>
+            <div class="nav-title">Zeon Profile Viewer</div>
+        </div>
+        <button class="search-button" onclick="openSearchModal()">
+            <span>🔍</span>
+            <span>Search</span>
+        </button>
+    </div>
+
     <div class="container">
-        <div class="header">
-            <h1>Zeon Bot Profile Viewer</h1>
-            <p>Advanced Discord Profile Analytics</p>
+        <div id="homeScreen" class="home-screen">
+            <div class="home-content">
+                <div class="home-icon">Z</div>
+                <h1 class="home-title">Welcome to Zeon Profile Viewer</h1>
+                <p class="home-subtitle">Search for any Discord user by their ID or username to view their detailed profile</p>
+                
+                <div class="search-container">
+                    <div class="search-input-wrapper">
+                        <input type="text" id="homeSearchInput" class="search-input" placeholder="Enter User ID or Username">
+                    </div>
+                </div>
+
+                <div class="quick-actions">
+                    <button class="quick-btn" onclick="loadExample('832622376063336498')">View Owner</button>
+                    <button class="quick-btn secondary" onclick="loadExample('1270759337916104708')">Example Profile</button>
+                </div>
+            </div>
         </div>
 
-        <div class="search-section">
-            <div class="search-box">
-                <input type="text" id="userIdInput" placeholder="Enter Discord User ID">
-                <button onclick="searchUser()">Search Profile</button>
-            </div>
-            <div class="quick-examples">
-                <span>Quick access:</span>
-                <button class="example-btn" onclick="loadExample('832622376063336498')">Owner Profile</button>
-                <button class="example-btn" onclick="loadExample('1270759337916104708')">Example User</button>
+        <div id="profileView" class="profile-view"></div>
+    </div>
+
+    <div id="searchModal" class="search-modal" onclick="closeSearchModal(event)">
+        <div class="search-modal-content" onclick="event.stopPropagation()">
+            <input type="text" id="modalSearchInput" class="search-modal-input" placeholder="Search by User ID or Username">
+            <div class="search-options">
+                <div class="search-option" onclick="loadExample('832622376063336498')">
+                    <div class="option-title">Owner Profile</div>
+                    <div class="option-desc">View bot owner's profile</div>
+                </div>
+                <div class="search-option" onclick="loadExample('1270759337916104708')">
+                    <div class="option-title">Example User</div>
+                    <div class="option-desc">View example profile</div>
+                </div>
             </div>
         </div>
-
-        <div id="content"></div>
     </div>
 
     <script>
         const API_BASE = 'https://zeonbot.onrender.com/api/v1';
 
+        function openSearchModal() {
+            document.getElementById('searchModal').classList.add('active');
+            document.getElementById('modalSearchInput').focus();
+        }
+
+        function closeSearchModal(event) {
+            if (event.target === document.getElementById('searchModal')) {
+                document.getElementById('searchModal').classList.remove('active');
+            }
+        }
+
         function loadExample(userId) {
-            document.getElementById('userIdInput').value = userId;
-            searchUser();
+            document.getElementById('searchModal').classList.remove('active');
+            searchUser(userId);
         }
 
         function checkUrlParams() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const userId = urlParams.get('id');
-            if (userId) {
-                document.getElementById('userIdInput').value = userId;
-                searchUser();
+            const path = window.location.pathname;
+            const segments = path.split('/').filter(s => s);
+            
+            if (segments.length > 0) {
+                const lastSegment = segments[segments.length - 1];
+                if (lastSegment && lastSegment !== 'profile.html') {
+                    searchUser(lastSegment);
+                }
             }
         }
 
-        async function searchUser() {
-            const userId = document.getElementById('userIdInput').value.trim();
-            const content = document.getElementById('content');
-
+        async function searchUser(input) {
+            const userId = input || document.getElementById('homeSearchInput').value.trim() || document.getElementById('modalSearchInput').value.trim();
+            
             if (!userId) {
-                content.innerHTML = '<div class="error">Please enter a Discord User ID</div>';
+                showError('Please enter a User ID or Username');
                 return;
             }
 
-            const newUrl = `${window.location.pathname}?id=${userId}`;
+            const newUrl = `${window.location.pathname.replace(/\/[^\/]*$/, '')}/${userId}`;
             window.history.pushState({userId}, '', newUrl);
 
-            content.innerHTML = '<div class="loading">Loading profile data</div>';
+            document.getElementById('homeScreen').style.display = 'none';
+            document.getElementById('profileView').innerHTML = '<div class="loading">Loading profile</div>';
+            document.getElementById('profileView').classList.add('active');
 
             try {
                 const response = await fetch(`${API_BASE}/users/${userId}`);
                 
                 if (!response.ok) {
-                    throw new Error('User not found or API error');
+                    throw new Error('User not found');
                 }
 
                 const data = await response.json();
                 displayProfile(data);
             } catch (error) {
-                content.innerHTML = `<div class="error">${error.message}. Please verify the User ID and try again.</div>`;
+                showError(error.message);
             }
+        }
+
+        function showError(message) {
+            const html = `
+                <div class="error-screen">
+                    <div class="error-icon">⚠️</div>
+                    <div class="error-title">User Not Found</div>
+                    <div class="error-message">${message}</div>
+                    <button class="back-button" onclick="goHome()">Go Back</button>
+                </div>
+            `;
+            document.getElementById('profileView').innerHTML = html;
+        }
+
+        function goHome() {
+            document.getElementById('homeScreen').style.display = 'flex';
+            document.getElementById('profileView').classList.remove('active');
+            window.history.pushState({}, '', window.location.pathname.replace(/\/[^\/]*$/, ''));
         }
 
         function parseEmoji(text) {
             if (!text) return '';
-            
             return text.replace(/<a?:(\w+):(\d+)>/g, (match, name, id) => {
                 const isAnimated = match.startsWith('<a:');
-                const extension = isAnimated ? 'gif' : 'png';
-                return `<img src="https://cdn.discordapp.com/emojis/${id}.${extension}" alt="${name}" title="${name}">`;
-            });
-        }
-
-        function copyShareUrl() {
-            const shareUrl = document.getElementById('shareUrl').textContent;
-            navigator.clipboard.writeText(shareUrl).then(() => {
-                const btn = document.querySelector('.copy-btn');
-                btn.textContent = 'Copied!';
-                btn.classList.add('copied');
-                setTimeout(() => {
-                    btn.textContent = 'Copy Link';
-                    btn.classList.remove('copied');
-                }, 2000);
+                const ext = isAnimated ? 'gif' : 'png';
+                return `<img src="https://cdn.discordapp.com/emojis/${id}.${ext}" alt="${name}">`;
             });
         }
 
         function displayProfile(data) {
-            const statusClass = {
-                'online': 'status-online',
-                'idle': 'status-idle',
-                'dnd': 'status-dnd',
-                'offline': 'status-offline'
-            };
+            const bannerStyle = data.banner_url ? 
+                `style="background-image: url('${data.banner_url}'); background-size: cover; background-position: center;"` : '';
 
-            const badges = data.badges.map(badge => 
-                `<div class="badge">
-                    <span class="badge-emoji">${parseEmoji(badge.emoji)}</span>
-                    <span>${badge.display_name}</span>
-                </div>`
+            const badges = data.badges.map(b => 
+                `<div class="profile-badge" title="${b.display_name}">${parseEmoji(b.emoji)}</div>`
             ).join('');
 
-            const parsedBio = data.bio ? parseEmoji(data.bio) : '';
-            const bioSection = parsedBio ? 
-                `<div class="bio-section">
-                    <h3>Biography</h3>
-                    <div class="bio-text">${parsedBio}</div>
-                </div>` : '';
+            const bioSection = data.bio ? 
+                `<div class="section-title">About Me</div>
+                <div class="bio-box">${parseEmoji(data.bio)}</div>` : '';
 
-            const noprefixTag = data.noprefix && data.noprefix.enabled ? 
-                `<span class="feature-tag noprefix-indicator">
-                    <span>⚡</span>
-                    <span>No Prefix ${data.noprefix.is_permanent ? '(Permanent)' : '(Active)'}</span>
-                </span>` : '';
+            const noprefixTag = data.noprefix?.enabled ? 
+                `<span class="status-tag tag-active">⚡ No Prefix ${data.noprefix.is_permanent ? '(Permanent)' : ''}</span>` : '';
 
-            const blacklistedTag = data.is_blacklisted ? 
-                `<span class="feature-tag blacklisted-indicator">
-                    <span>⚠️</span>
-                    <span>Blacklisted</span>
-                </span>` : '';
+            const blacklistTag = data.is_blacklisted ? 
+                `<span class="status-tag tag-blacklist">⚠️ Blacklisted</span>` : '';
 
             const botTag = data.is_bot ? 
-                `<span class="feature-tag bot-indicator">
-                    <span>🤖</span>
-                    <span>Bot Account</span>
-                </span>` : '';
+                `<span class="status-tag tag-bot">🤖 Bot</span>` : '';
 
-            const voteInfo = data.vote_info ? 
-                `<div class="stat-card">
-                    <div class="stat-label">Total Votes</div>
-                    <div class="stat-value">${data.vote_info.total_votes}</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-label">Vote Status</div>
-                    <div class="stat-value">${data.vote_info.has_active_vote ? '✅ Active' : '❌ Inactive'}</div>
-                </div>` : '';
-
-            const guilds = data.mutual_guilds.map(guild => 
-                `<div class="guild-card">
-                    <img src="${guild.icon_url || 'https://cdn.discordapp.com/embed/avatars/0.png'}" 
-                         alt="${guild.name}" class="guild-icon">
-                    <div class="guild-name">${guild.name}</div>
-                    <div class="guild-id">ID: ${guild.id}</div>
+            const guilds = data.mutual_guilds.map(g => 
+                `<div class="guild-item">
+                    <img src="${g.icon_url || 'https://cdn.discordapp.com/embed/avatars/0.png'}" class="guild-icon">
+                    <div class="guild-info">
+                        <div class="guild-name">${g.name}</div>
+                        <div class="guild-id">${g.id}</div>
+                    </div>
                 </div>`
             ).join('');
 
-            const shareUrl = `${window.location.origin}${window.location.pathname}?id=${data.id}`;
-
             const html = `
-                <div class="profile-card">
-                    <div class="profile-banner" style="${data.banner_url ? `background-image: url('${data.banner_url}'); background-size: cover; background-position: center;` : ''}"></div>
+                <div class="profile-container">
+                    <div class="profile-banner-section ${data.banner_url ? 'has-banner' : ''}" ${bannerStyle}></div>
                     
-                    <div class="profile-content">
-                        <div class="avatar-section">
-                            <div class="avatar-wrapper">
-                                <img src="${data.avatar_url}" alt="${data.name}" class="avatar">
-                                <div class="status-indicator ${statusClass['online']}"></div>
+                    <div class="profile-content-wrapper">
+                        <div class="profile-header">
+                            <div class="avatar-container">
+                                <img src="${data.avatar_url}" class="profile-avatar">
+                                <div class="status-badge status-online"></div>
                             </div>
-                            <div class="user-info">
-                                <div class="username">${data.global_name || data.name}</div>
-                                <div class="user-id">@${data.name}${data.discriminator !== '0' ? '#' + data.discriminator : ''} • ${data.id}</div>
-                                <div class="badges">
-                                    ${badges}
-                                    ${noprefixTag}
-                                    ${blacklistedTag}
-                                    ${botTag}
+                            <div class="profile-info">
+                                <div class="username-section">
+                                    <div class="display-name">${data.global_name || data.name}</div>
+                                    <div class="username-tag">@${data.name}${data.discriminator !== '0' ? '#' + data.discriminator : ''}</div>
                                 </div>
+                                ${badges ? `<div class="profile-badges">${badges}</div>` : ''}
                             </div>
                         </div>
+
+                        <div class="divider"></div>
 
                         ${bioSection}
 
-                        <div class="stats-grid">
-                            <div class="stat-card">
-                                <div class="stat-label">Mutual Servers</div>
-                                <div class="stat-value">${data.mutual_guilds_count}</div>
+                        <div class="section-title">User Information</div>
+                        <div class="info-rows">
+                            <div class="info-row">
+                                <span class="info-label">User ID</span>
+                                <span class="info-value">${data.id}</span>
                             </div>
-                            <div class="stat-card">
-                                <div class="stat-label">Account Created</div>
-                                <div class="stat-value">${new Date(data.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</div>
+                            <div class="info-row">
+                                <span class="info-label">Account Created</span>
+                                <span class="info-value">${new Date(data.created_at).toLocaleDateString('en-US', {month: 'short', day: 'numeric', year: 'numeric'})}</span>
                             </div>
-                            ${voteInfo}
+                            <div class="info-row">
+                                <span class="info-label">Mutual Servers</span>
+                                <span class="info-value">${data.mutual_guilds_count}</span>
+                            </div>
+                            ${data.vote_info ? `
+                            <div class="info-row">
+                                <span class="info-label">Total Votes</span>
+                                <span class="info-value">${data.vote_info.total_votes}</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">Vote Status</span>
+                                <span class="info-value">${data.vote_info.has_active_vote ? '✅ Active' : '❌ Inactive'}</span>
+                            </div>` : ''}
                         </div>
 
-                        <div class="share-section">
-                            <span class="share-label">Share Profile:</span>
-                            <div class="share-url" id="shareUrl">${shareUrl}</div>
-                            <button class="copy-btn" onclick="copyShareUrl()">Copy Link</button>
-                        </div>
+                        ${noprefixTag || blacklistTag || botTag ? `
+                        <div class="divider"></div>
+                        <div class="section-title">Status Tags</div>
+                        <div class="tag-container">
+                            ${noprefixTag}
+                            ${blacklistTag}
+                            ${botTag}
+                        </div>` : ''}
 
                         ${data.mutual_guilds.length > 0 ? `
-                            <div class="guilds-section">
-                                <h2 class="section-title">
-                                    <span>Mutual Servers (${data.mutual_guilds_count})</span>
-                                </h2>
-                                <div class="guilds-grid">
-                                    ${guilds}
-                                </div>
-                            </div>
-                        ` : ''}
+                        <div class="divider"></div>
+                        <div class="guilds-section">
+                            <div class="section-title">Mutual Servers — ${data.mutual_guilds_count}</div>
+                            <div class="guilds-grid">${guilds}</div>
+                        </div>` : ''}
                     </div>
                 </div>
             `;
 
-            document.getElementById('content').innerHTML = html;
+            document.getElementById('profileView').innerHTML = html;
         }
 
-        document.getElementById('userIdInput').addEventListener('keypress', function(e) {
+        document.getElementById('homeSearchInput').addEventListener('keypress', e => {
+            if (e.key === 'Enter') searchUser();
+        });
+
+        document.getElementById('modalSearchInput').addEventListener('keypress', e => {
             if (e.key === 'Enter') {
+                document.getElementById('searchModal').classList.remove('active');
                 searchUser();
             }
         });
 
-        window.addEventListener('popstate', function(event) {
-            if (event.state && event.state.userId) {
-                document.getElementById('userIdInput').value = event.state.userId;
-                searchUser();
-            }
+        window.addEventListener('popstate', () => {
+            checkUrlParams();
         });
 
         checkUrlParams();
