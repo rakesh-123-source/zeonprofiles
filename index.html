@@ -12,7 +12,7 @@
         }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
             background: #0a0a0f;
             color: #ffffff;
             min-height: 100vh;
@@ -28,14 +28,14 @@
             right: 0;
             bottom: 0;
             background: 
-                radial-gradient(circle at 10% 20%, rgba(88, 101, 242, 0.15) 0%, transparent 50%),
-                radial-gradient(circle at 90% 80%, rgba(114, 137, 218, 0.1) 0%, transparent 50%);
+                radial-gradient(circle at 10% 20%, rgba(88, 101, 242, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 90% 80%, rgba(114, 137, 218, 0.06) 0%, transparent 50%);
             pointer-events: none;
             z-index: 0;
         }
 
         .container {
-            max-width: 1400px;
+            max-width: 1200px;
             margin: 0 auto;
             padding: 40px 20px;
             position: relative;
@@ -44,7 +44,7 @@
 
         .header {
             text-align: center;
-            margin-bottom: 50px;
+            margin-bottom: 40px;
         }
 
         .header h1 {
@@ -54,39 +54,40 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            margin-bottom: 10px;
-            letter-spacing: -1px;
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
         }
 
         .header p {
-            color: #b9bbbe;
-            font-size: 1.1em;
+            color: #a0a0a8;
+            font-size: 1em;
             font-weight: 400;
         }
 
         .search-section {
-            background: #18181f;
-            border: 1px solid #2a2a35;
+            background: rgba(24, 24, 31, 0.6);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(88, 101, 242, 0.1);
             border-radius: 16px;
-            padding: 32px;
-            margin-bottom: 40px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            padding: 28px;
+            margin-bottom: 32px;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
         }
 
         .search-box {
             display: flex;
             gap: 12px;
-            margin-bottom: 20px;
+            margin-bottom: 16px;
         }
 
         .search-box input {
             flex: 1;
-            padding: 16px 20px;
-            background: #0f0f14;
-            border: 1px solid #2a2a35;
-            border-radius: 12px;
+            padding: 14px 18px;
+            background: rgba(15, 15, 20, 0.8);
+            border: 1px solid rgba(88, 101, 242, 0.15);
+            border-radius: 10px;
             color: #ffffff;
-            font-size: 1em;
+            font-size: 0.95em;
             transition: all 0.3s ease;
             font-family: 'SF Mono', 'Monaco', 'Courier New', monospace;
         }
@@ -95,6 +96,7 @@
             outline: none;
             border-color: #5865F2;
             box-shadow: 0 0 0 3px rgba(88, 101, 242, 0.1);
+            background: rgba(15, 15, 20, 0.95);
         }
 
         .search-box input::placeholder {
@@ -102,13 +104,13 @@
         }
 
         .search-box button {
-            padding: 16px 32px;
+            padding: 14px 28px;
             background: linear-gradient(135deg, #5865F2 0%, #4752C4 100%);
             border: none;
-            border-radius: 12px;
+            border-radius: 10px;
             color: white;
             font-weight: 600;
-            font-size: 1em;
+            font-size: 0.95em;
             cursor: pointer;
             transition: all 0.3s ease;
             white-space: nowrap;
@@ -116,26 +118,30 @@
 
         .search-box button:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(88, 101, 242, 0.4);
+            box-shadow: 0 6px 20px rgba(88, 101, 242, 0.4);
+        }
+
+        .search-box button:active {
+            transform: translateY(0);
         }
 
         .quick-examples {
             display: flex;
-            gap: 10px;
+            gap: 8px;
             flex-wrap: wrap;
             align-items: center;
         }
 
         .quick-examples span {
             color: #8e8e9e;
-            font-size: 0.9em;
-            margin-right: 10px;
+            font-size: 0.85em;
+            margin-right: 8px;
         }
 
         .example-btn {
-            padding: 8px 16px;
-            background: #0f0f14;
-            border: 1px solid #2a2a35;
+            padding: 7px 14px;
+            background: rgba(88, 101, 242, 0.08);
+            border: 1px solid rgba(88, 101, 242, 0.2);
             border-radius: 8px;
             color: #b9bbbe;
             cursor: pointer;
@@ -144,32 +150,40 @@
         }
 
         .example-btn:hover {
-            background: #18181f;
+            background: rgba(88, 101, 242, 0.15);
             border-color: #5865F2;
             color: #ffffff;
+            transform: translateY(-1px);
         }
 
         .loading {
             text-align: center;
             color: #b9bbbe;
-            font-size: 1.2em;
+            font-size: 1.1em;
             margin: 60px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
         }
 
-        .loading::after {
-            content: '...';
-            animation: dots 1.5s steps(4, end) infinite;
+        .loading::before {
+            content: '';
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(88, 101, 242, 0.2);
+            border-top-color: #5865F2;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
         }
 
-        @keyframes dots {
-            0%, 20% { content: '.'; }
-            40% { content: '..'; }
-            60%, 100% { content: '...'; }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
         }
 
         .error {
-            background: rgba(237, 66, 69, 0.1);
-            border: 1px solid rgba(237, 66, 69, 0.3);
+            background: rgba(237, 66, 69, 0.08);
+            border: 1px solid rgba(237, 66, 69, 0.2);
             border-radius: 12px;
             padding: 20px;
             color: #ed4245;
@@ -178,30 +192,31 @@
         }
 
         .profile-card {
-            background: #18181f;
-            border: 1px solid #2a2a35;
+            background: rgba(24, 24, 31, 0.6);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(88, 101, 242, 0.1);
             border-radius: 16px;
             overflow: hidden;
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
         }
 
         .profile-banner {
-            height: 240px;
+            height: 200px;
             background: linear-gradient(135deg, #5865F2 0%, #7289DA 100%);
             position: relative;
         }
 
         .profile-content {
-            padding: 0 48px 48px;
+            padding: 0 32px 32px;
             position: relative;
         }
 
         .avatar-section {
             display: flex;
             align-items: flex-end;
-            gap: 32px;
-            margin-top: -80px;
-            margin-bottom: 32px;
+            gap: 24px;
+            margin-top: -60px;
+            margin-bottom: 28px;
         }
 
         .avatar-wrapper {
@@ -209,22 +224,22 @@
         }
 
         .avatar {
-            width: 160px;
-            height: 160px;
+            width: 128px;
+            height: 128px;
             border-radius: 50%;
-            border: 8px solid #18181f;
+            border: 6px solid #18181f;
             box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
             object-fit: cover;
         }
 
         .status-indicator {
             position: absolute;
-            bottom: 12px;
-            right: 12px;
-            width: 36px;
-            height: 36px;
+            bottom: 8px;
+            right: 8px;
+            width: 28px;
+            height: 28px;
             border-radius: 50%;
-            border: 6px solid #18181f;
+            border: 5px solid #18181f;
         }
 
         .status-online { background: #3ba55d; }
@@ -234,100 +249,122 @@
 
         .user-info {
             flex: 1;
-            padding-bottom: 24px;
+            padding-bottom: 18px;
         }
 
         .username {
-            font-size: 2.2em;
+            font-size: 1.8em;
             font-weight: 700;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             color: #ffffff;
-            letter-spacing: -0.5px;
+            letter-spacing: -0.3px;
         }
 
         .user-id {
             color: #8e8e9e;
-            font-size: 1em;
-            margin-bottom: 20px;
+            font-size: 0.9em;
+            margin-bottom: 16px;
             font-family: 'SF Mono', 'Monaco', monospace;
         }
 
         .badges {
             display: flex;
-            gap: 10px;
+            gap: 8px;
             flex-wrap: wrap;
         }
 
         .badge {
-            background: rgba(88, 101, 242, 0.1);
-            padding: 10px 18px;
+            background: rgba(88, 101, 242, 0.08);
+            padding: 8px 14px;
             border-radius: 8px;
             color: #ffffff;
-            font-size: 0.9em;
-            border: 1px solid rgba(88, 101, 242, 0.3);
+            font-size: 0.85em;
+            border: 1px solid rgba(88, 101, 242, 0.2);
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
             transition: all 0.3s ease;
             font-weight: 500;
         }
 
         .badge:hover {
-            background: rgba(88, 101, 242, 0.2);
-            border-color: rgba(88, 101, 242, 0.5);
+            background: rgba(88, 101, 242, 0.15);
+            border-color: rgba(88, 101, 242, 0.4);
+            transform: translateY(-1px);
         }
 
         .badge-emoji {
-            font-size: 1.2em;
+            font-size: 1.1em;
+        }
+
+        .badge-emoji img {
+            width: 18px;
+            height: 18px;
+            vertical-align: middle;
         }
 
         .bio-section {
-            background: #0f0f14;
-            border: 1px solid #2a2a35;
+            background: rgba(15, 15, 20, 0.6);
+            border: 1px solid rgba(88, 101, 242, 0.1);
             border-radius: 12px;
-            padding: 24px;
-            margin-bottom: 32px;
+            padding: 20px;
+            margin-bottom: 28px;
         }
 
         .bio-section h3 {
             color: #ffffff;
             margin-bottom: 12px;
-            font-size: 1.1em;
+            font-size: 1em;
             font-weight: 600;
             display: flex;
             align-items: center;
             gap: 8px;
         }
 
+        .bio-section h3::before {
+            content: '';
+            width: 3px;
+            height: 16px;
+            background: linear-gradient(135deg, #5865F2, #7289DA);
+            border-radius: 2px;
+        }
+
         .bio-text {
             color: #b9bbbe;
             line-height: 1.6;
-            font-size: 1em;
+            font-size: 0.95em;
+        }
+
+        .bio-text img {
+            width: 18px;
+            height: 18px;
+            vertical-align: middle;
+            margin: 0 2px;
         }
 
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 16px;
-            margin-bottom: 32px;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 14px;
+            margin-bottom: 28px;
         }
 
         .stat-card {
-            background: #0f0f14;
-            border: 1px solid #2a2a35;
+            background: rgba(15, 15, 20, 0.6);
+            border: 1px solid rgba(88, 101, 242, 0.1);
             border-radius: 12px;
-            padding: 24px;
+            padding: 20px;
             transition: all 0.3s ease;
         }
 
         .stat-card:hover {
-            border-color: #5865F2;
+            border-color: rgba(88, 101, 242, 0.3);
             transform: translateY(-2px);
         }
 
         .stat-label {
             color: #8e8e9e;
-            font-size: 0.85em;
+            font-size: 0.8em;
             margin-bottom: 8px;
             text-transform: uppercase;
             letter-spacing: 0.5px;
@@ -336,63 +373,71 @@
 
         .stat-value {
             color: #ffffff;
-            font-size: 1.8em;
+            font-size: 1.6em;
             font-weight: 700;
         }
 
         .guilds-section {
-            margin-top: 40px;
+            margin-top: 32px;
         }
 
         .section-title {
             color: #ffffff;
-            font-size: 1.5em;
-            margin-bottom: 24px;
+            font-size: 1.3em;
+            margin-bottom: 20px;
             font-weight: 700;
             display: flex;
             align-items: center;
             gap: 10px;
         }
 
+        .section-title::before {
+            content: '';
+            width: 3px;
+            height: 22px;
+            background: linear-gradient(135deg, #5865F2, #7289DA);
+            border-radius: 2px;
+        }
+
         .guilds-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 16px;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 14px;
         }
 
         .guild-card {
-            background: #0f0f14;
-            border: 1px solid #2a2a35;
+            background: rgba(15, 15, 20, 0.6);
+            border: 1px solid rgba(88, 101, 242, 0.1);
             border-radius: 12px;
-            padding: 20px;
+            padding: 18px;
             transition: all 0.3s ease;
             cursor: pointer;
         }
 
         .guild-card:hover {
-            border-color: #5865F2;
+            border-color: rgba(88, 101, 242, 0.3);
             transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(88, 101, 242, 0.2);
+            box-shadow: 0 6px 20px rgba(88, 101, 242, 0.15);
         }
 
         .guild-icon {
-            width: 64px;
-            height: 64px;
-            border-radius: 16px;
-            margin-bottom: 16px;
+            width: 56px;
+            height: 56px;
+            border-radius: 14px;
+            margin-bottom: 14px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
         }
 
         .guild-name {
             color: #ffffff;
-            font-size: 1.1em;
+            font-size: 1em;
             font-weight: 600;
             margin-bottom: 6px;
         }
 
         .guild-id {
             color: #6b6b7a;
-            font-size: 0.85em;
+            font-size: 0.8em;
             font-family: 'SF Mono', 'Monaco', monospace;
         }
 
@@ -408,59 +453,509 @@
         }
 
         .noprefix-indicator {
+            background: rgba(59, 165, 93, 0.08);
+            border-color: rgba(59, 165, 93, 0.2);
+            color: #3ba55d;
+        }
+
+        .blacklisted-indicator {
+            background: rgba(237, 66, 69, 0.08);
+            border-color: rgba(237, 66, 69, 0.2);
+            color: #ed4245;
+        }
+
+        .bot-indicator {
+            background: rgba(88, 101, 242, 0.08);
+            border-color: rgba(88, 101, 242, 0.2);
+            color: #5865F2;
+        }
+
+        .share-section {
+            margin-top: 24px;
+            padding: 18px;
+            background: rgba(15, 15, 20, 0.6);
+            border: 1px solid rgba(88, 101, 242, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+        }
+
+        .share-label {
+            color: #8e8e9e;
+            font-size: 0.9em;
+            font-weight: 500;
+        }
+
+        .share-url {
+            flex: 1;
+            padding: 10px 14px;
+            background: rgba(15, 15, 20, 0.8);
+            border: 1px solid rgba(88, 101, 242, 0.15);
+            border-radius: 8px;
+            color: #b9bbbe;
+            font-size: 0.85em;
+            font-family: 'SF Mono', 'Monaco', monospace;
+            user-select: all;
+        }
+
+        .copy-btn {
+            padding: 10px 20px;
+            background: rgba(88, 101, 242, 0.1);
+            border: 1px solid rgba(88, 101, 242, 0.3);
+            border-radius: 8px;
+            color: #5865F2;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.85em;
+        }
+
+        .copy-btn:hover {
+            background: rgba(88, 101, 242, 0.2);
+            transform: translateY(-1px);
+        }
+
+        .copy-btn.copied {
             background: rgba(59, 165, 93, 0.1);
             border-color: rgba(59, 165, 93, 0.3);
             color: #3ba55d;
         }
 
-        .blacklisted-indicator {
-            background: rgba(237, 66, 69, 0.1);
-            border-color: rgba(237, 66, 69, 0.3);
-            color: #ed4245;
-        }
+        @media (max-width: 1024px) {
+            .container {
+                padding: 32px 20px;
+            }
 
-        .bot-indicator {
-            background: rgba(88, 101, 242, 0.1);
-            border-color: rgba(88, 101, 242, 0.3);
-            color: #5865F2;
-        }
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
 
-        .premium-indicator {
-            background: linear-gradient(135deg, rgba(255, 115, 250, 0.1), rgba(138, 43, 226, 0.1));
-            border-color: rgba(255, 115, 250, 0.3);
-            color: #ff73fa;
+            .guilds-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
 
         @media (max-width: 768px) {
+            .container {
+                padding: 20px 16px;
+            }
+
+            .header {
+                margin-bottom: 28px;
+            }
+
             .header h1 {
-                font-size: 1.8em;
+                font-size: 2em;
+            }
+
+            .header p {
+                font-size: 0.9em;
+            }
+
+            .search-section {
+                padding: 20px 16px;
+                margin-bottom: 24px;
             }
 
             .search-box {
                 flex-direction: column;
+                gap: 10px;
+            }
+
+            .search-box input {
+                padding: 13px 16px;
+                font-size: 0.9em;
+            }
+
+            .search-box button {
+                width: 100%;
+                padding: 13px 24px;
+            }
+
+            .quick-examples {
+                gap: 6px;
+            }
+
+            .example-btn {
+                font-size: 0.8em;
+                padding: 6px 12px;
+            }
+
+            .profile-banner {
+                height: 160px;
             }
 
             .profile-content {
-                padding: 0 24px 24px;
+                padding: 0 16px 24px;
             }
 
             .avatar-section {
                 flex-direction: column;
                 align-items: center;
                 text-align: center;
+                margin-top: -50px;
+                margin-bottom: 20px;
+                gap: 16px;
             }
 
             .avatar {
-                width: 120px;
-                height: 120px;
+                width: 100px;
+                height: 100px;
+                border-width: 5px;
+            }
+
+            .status-indicator {
+                width: 24px;
+                height: 24px;
+                border-width: 4px;
+                bottom: 6px;
+                right: 6px;
             }
 
             .username {
+                font-size: 1.5em;
+            }
+
+            .user-id {
+                font-size: 0.85em;
+                margin-bottom: 12px;
+            }
+
+            .badges {
+                justify-content: center;
+                gap: 6px;
+            }
+
+            .badge {
+                font-size: 0.8em;
+                padding: 7px 12px;
+            }
+
+            .badge-emoji img {
+                width: 16px;
+                height: 16px;
+            }
+
+            .bio-section {
+                padding: 16px;
+                margin-bottom: 20px;
+            }
+
+            .bio-section h3 {
+                font-size: 0.95em;
+            }
+
+            .bio-text {
+                font-size: 0.9em;
+            }
+
+            .bio-text img {
+                width: 16px;
+                height: 16px;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+                margin-bottom: 20px;
+            }
+
+            .stat-card {
+                padding: 16px;
+            }
+
+            .stat-label {
+                font-size: 0.75em;
+            }
+
+            .stat-value {
+                font-size: 1.4em;
+            }
+
+            .share-section {
+                flex-direction: column;
+                align-items: stretch;
+                padding: 14px;
+                gap: 10px;
+                margin-top: 20px;
+            }
+
+            .share-label {
+                font-size: 0.85em;
+            }
+
+            .share-url {
+                width: 100%;
+                overflow-x: auto;
+                white-space: nowrap;
+                padding: 9px 12px;
+                font-size: 0.8em;
+            }
+
+            .copy-btn {
+                width: 100%;
+                padding: 9px 18px;
+            }
+
+            .guilds-section {
+                margin-top: 24px;
+            }
+
+            .section-title {
+                font-size: 1.15em;
+                margin-bottom: 16px;
+            }
+
+            .section-title::before {
+                height: 18px;
+            }
+
+            .guilds-grid {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+
+            .guild-card {
+                padding: 14px;
+            }
+
+            .guild-icon {
+                width: 48px;
+                height: 48px;
+                border-radius: 12px;
+                margin-bottom: 10px;
+            }
+
+            .guild-name {
+                font-size: 0.95em;
+            }
+
+            .guild-id {
+                font-size: 0.75em;
+            }
+
+            .feature-tag {
+                font-size: 0.8em;
+                padding: 7px 12px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 16px 12px;
+            }
+
+            .header h1 {
                 font-size: 1.6em;
+                letter-spacing: -0.3px;
+            }
+
+            .header p {
+                font-size: 0.85em;
+            }
+
+            .search-section {
+                padding: 16px 12px;
+            }
+
+            .search-box input {
+                padding: 12px 14px;
+                font-size: 0.85em;
+            }
+
+            .search-box button {
+                padding: 12px 20px;
+                font-size: 0.9em;
+            }
+
+            .quick-examples span {
+                font-size: 0.8em;
+            }
+
+            .example-btn {
+                font-size: 0.75em;
+                padding: 5px 10px;
+            }
+
+            .profile-banner {
+                height: 140px;
+            }
+
+            .profile-content {
+                padding: 0 12px 20px;
+            }
+
+            .avatar-section {
+                margin-top: -45px;
+            }
+
+            .avatar {
+                width: 90px;
+                height: 90px;
+                border-width: 4px;
+            }
+
+            .status-indicator {
+                width: 20px;
+                height: 20px;
+                border-width: 3px;
+                bottom: 4px;
+                right: 4px;
+            }
+
+            .username {
+                font-size: 1.3em;
+            }
+
+            .user-id {
+                font-size: 0.8em;
+            }
+
+            .badge {
+                font-size: 0.75em;
+                padding: 6px 10px;
+            }
+
+            .badge-emoji img {
+                width: 14px;
+                height: 14px;
+            }
+
+            .bio-section {
+                padding: 14px;
+            }
+
+            .bio-section h3 {
+                font-size: 0.9em;
+            }
+
+            .bio-text {
+                font-size: 0.85em;
+            }
+
+            .bio-text img {
+                width: 14px;
+                height: 14px;
             }
 
             .stats-grid {
                 grid-template-columns: 1fr;
+                gap: 8px;
+            }
+
+            .stat-card {
+                padding: 14px;
+            }
+
+            .stat-label {
+                font-size: 0.7em;
+            }
+
+            .stat-value {
+                font-size: 1.3em;
+            }
+
+            .share-section {
+                padding: 12px;
+            }
+
+            .share-label {
+                font-size: 0.8em;
+            }
+
+            .share-url {
+                padding: 8px 10px;
+                font-size: 0.75em;
+            }
+
+            .copy-btn {
+                padding: 8px 16px;
+                font-size: 0.8em;
+            }
+
+            .section-title {
+                font-size: 1.05em;
+            }
+
+            .guild-card {
+                padding: 12px;
+            }
+
+            .guild-icon {
+                width: 44px;
+                height: 44px;
+                border-radius: 10px;
+            }
+
+            .guild-name {
+                font-size: 0.9em;
+            }
+
+            .guild-id {
+                font-size: 0.7em;
+            }
+
+            .feature-tag {
+                font-size: 0.75em;
+                padding: 6px 10px;
+            }
+
+            .loading {
+                font-size: 1em;
+                margin: 40px 0;
+            }
+
+            .loading::before {
+                width: 18px;
+                height: 18px;
+                border-width: 2px;
+            }
+
+            .error {
+                padding: 16px;
+                font-size: 0.9em;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .container {
+                padding: 12px 10px;
+            }
+
+            .header h1 {
+                font-size: 1.4em;
+            }
+
+            .header p {
+                font-size: 0.8em;
+            }
+
+            .search-section {
+                padding: 14px 10px;
+            }
+
+            .avatar {
+                width: 80px;
+                height: 80px;
+            }
+
+            .username {
+                font-size: 1.2em;
+            }
+
+            .stats-grid {
+                gap: 6px;
+            }
+
+            .stat-card {
+                padding: 12px;
+            }
+
+            .guild-icon {
+                width: 40px;
+                height: 40px;
             }
         }
     </style>
@@ -495,6 +990,15 @@
             searchUser();
         }
 
+        function checkUrlParams() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const userId = urlParams.get('id');
+            if (userId) {
+                document.getElementById('userIdInput').value = userId;
+                searchUser();
+            }
+        }
+
         async function searchUser() {
             const userId = document.getElementById('userIdInput').value.trim();
             const content = document.getElementById('content');
@@ -503,6 +1007,9 @@
                 content.innerHTML = '<div class="error">Please enter a Discord User ID</div>';
                 return;
             }
+
+            const newUrl = `${window.location.pathname}?id=${userId}`;
+            window.history.pushState({userId}, '', newUrl);
 
             content.innerHTML = '<div class="loading">Loading profile data</div>';
 
@@ -516,21 +1023,31 @@
                 const data = await response.json();
                 displayProfile(data);
             } catch (error) {
-                content.innerHTML = `<div class="error">❌ ${error.message}. Please verify the User ID and try again.</div>`;
+                content.innerHTML = `<div class="error">${error.message}. Please verify the User ID and try again.</div>`;
             }
         }
 
-        function parseEmoji(emoji) {
-            // If it's a custom Discord emoji format like <:name:id> or <a:name:id>
-            const customEmojiMatch = emoji.match(/<a?:(\w+):(\d+)>/);
-            if (customEmojiMatch) {
-                const [, name, id] = customEmojiMatch;
-                const isAnimated = emoji.startsWith('<a:');
+        function parseEmoji(text) {
+            if (!text) return '';
+            
+            return text.replace(/<a?:(\w+):(\d+)>/g, (match, name, id) => {
+                const isAnimated = match.startsWith('<a:');
                 const extension = isAnimated ? 'gif' : 'png';
-                return `<img src="https://cdn.discordapp.com/emojis/${id}.${extension}" alt="${name}" style="width: 20px; height: 20px; vertical-align: middle;">`;
-            }
-            // Return as is if it's a unicode emoji
-            return emoji;
+                return `<img src="https://cdn.discordapp.com/emojis/${id}.${extension}" alt="${name}" title="${name}">`;
+            });
+        }
+
+        function copyShareUrl() {
+            const shareUrl = document.getElementById('shareUrl').textContent;
+            navigator.clipboard.writeText(shareUrl).then(() => {
+                const btn = document.querySelector('.copy-btn');
+                btn.textContent = 'Copied!';
+                btn.classList.add('copied');
+                setTimeout(() => {
+                    btn.textContent = 'Copy Link';
+                    btn.classList.remove('copied');
+                }, 2000);
+            });
         }
 
         function displayProfile(data) {
@@ -548,10 +1065,11 @@
                 </div>`
             ).join('');
 
-            const bioSection = data.bio ? 
+            const parsedBio = data.bio ? parseEmoji(data.bio) : '';
+            const bioSection = parsedBio ? 
                 `<div class="bio-section">
-                    <h3><span>📝</span> Biography</h3>
-                    <div class="bio-text">${data.bio}</div>
+                    <h3>Biography</h3>
+                    <div class="bio-text">${parsedBio}</div>
                 </div>` : '';
 
             const noprefixTag = data.noprefix && data.noprefix.enabled ? 
@@ -591,6 +1109,8 @@
                 </div>`
             ).join('');
 
+            const shareUrl = `${window.location.origin}${window.location.pathname}?id=${data.id}`;
+
             const html = `
                 <div class="profile-card">
                     <div class="profile-banner" style="${data.banner_url ? `background-image: url('${data.banner_url}'); background-size: cover; background-position: center;` : ''}"></div>
@@ -627,10 +1147,15 @@
                             ${voteInfo}
                         </div>
 
+                        <div class="share-section">
+                            <span class="share-label">Share Profile:</span>
+                            <div class="share-url" id="shareUrl">${shareUrl}</div>
+                            <button class="copy-btn" onclick="copyShareUrl()">Copy Link</button>
+                        </div>
+
                         ${data.mutual_guilds.length > 0 ? `
                             <div class="guilds-section">
                                 <h2 class="section-title">
-                                    <span>🏰</span>
                                     <span>Mutual Servers (${data.mutual_guilds_count})</span>
                                 </h2>
                                 <div class="guilds-grid">
@@ -650,6 +1175,15 @@
                 searchUser();
             }
         });
+
+        window.addEventListener('popstate', function(event) {
+            if (event.state && event.state.userId) {
+                document.getElementById('userIdInput').value = event.state.userId;
+                searchUser();
+            }
+        });
+
+        checkUrlParams();
     </script>
 </body>
 </html>
