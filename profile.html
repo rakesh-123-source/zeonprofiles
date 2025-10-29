@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zeon Bot - Profile Viewer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #0a0a0f;
+            color: #ffffff;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 10% 20%, rgba(88, 101, 242, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 90% 80%, rgba(114, 137, 218, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            font-weight: 700;
+            background: linear-gradient(135deg, #5865F2 0%, #7289DA 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+            letter-spacing: -1px;
+        }
+
+        .header p {
+            color: #b9bbbe;
+            font-size: 1.1em;
+            font-weight: 400;
+        }
+
+        .search-section {
+            background: #18181f;
+            border: 1px solid #2a2a35;
+            border-radius: 16px;
+            padding: 32px;
+            margin-bottom: 40px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+        }
+
+        .search-box {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .search-box input {
+            flex: 1;
+            padding: 16px 20px;
+            background: #0f0f14;
+            border: 1px solid #2a2a35;
+            border-radius: 12px;
+            color: #ffffff;
+            font-size: 1em;
+            transition: all 0.3s ease;
+            font-family: 'SF Mono', 'Monaco', 'Courier New', monospace;
+        }
+
+        .search-box input:focus {
+            outline: none;
+            border-color: #5865F2;
+            box-shadow: 0 0 0 3px rgba(88, 101, 242, 0.1);
+        }
+
+        .search-box input::placeholder {
+            color: #6b6b7a;
+        }
+
+        .search-box button {
+            padding: 16px 32px;
+            background: linear-gradient(135deg, #5865F2 0%, #4752C4 100%);
+            border: none;
+            border-radius: 12px;
+            color: white;
+            font-weight: 600;
+            font-size: 1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .search-box button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(88, 101, 242, 0.4);
+        }
+
+        .quick-examples {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .quick-examples span {
+            color: #8e8e9e;
+            font-size: 0.9em;
+            margin-right: 10px;
+        }
+
+        .example-btn {
+            padding: 8px 16px;
+            background: #0f0f14;
+            border: 1px solid #2a2a35;
+            border-radius: 8px;
+            color: #b9bbbe;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.85em;
+        }
+
+        .example-btn:hover {
+            background: #18181f;
+            border-color: #5865F2;
+            color: #ffffff;
+        }
+
+        .loading {
+            text-align: center;
+            color: #b9bbbe;
+            font-size: 1.2em;
+            margin: 60px 0;
+        }
+
+        .loading::after {
+            content: '...';
+            animation: dots 1.5s steps(4, end) infinite;
+        }
+
+        @keyframes dots {
+            0%, 20% { content: '.'; }
+            40% { content: '..'; }
+            60%, 100% { content: '...'; }
+        }
+
+        .error {
+            background: rgba(237, 66, 69, 0.1);
+            border: 1px solid rgba(237, 66, 69, 0.3);
+            border-radius: 12px;
+            padding: 20px;
+            color: #ed4245;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .profile-card {
+            background: #18181f;
+            border: 1px solid #2a2a35;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+        }
+
+        .profile-banner {
+            height: 240px;
+            background: linear-gradient(135deg, #5865F2 0%, #7289DA 100%);
+            position: relative;
+        }
+
+        .profile-content {
+            padding: 0 48px 48px;
+            position: relative;
+        }
+
+        .avatar-section {
+            display: flex;
+            align-items: flex-end;
+            gap: 32px;
+            margin-top: -80px;
+            margin-bottom: 32px;
+        }
+
+        .avatar-wrapper {
+            position: relative;
+        }
+
+        .avatar {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            border: 8px solid #18181f;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+            object-fit: cover;
+        }
+
+        .status-indicator {
+            position: absolute;
+            bottom: 12px;
+            right: 12px;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: 6px solid #18181f;
+        }
+
+        .status-online { background: #3ba55d; }
+        .status-idle { background: #faa81a; }
+        .status-dnd { background: #ed4245; }
+        .status-offline { background: #747f8d; }
+
+        .user-info {
+            flex: 1;
+            padding-bottom: 24px;
+        }
+
+        .username {
+            font-size: 2.2em;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #ffffff;
+            letter-spacing: -0.5px;
+        }
+
+        .user-id {
+            color: #8e8e9e;
+            font-size: 1em;
+            margin-bottom: 20px;
+            font-family: 'SF Mono', 'Monaco', monospace;
+        }
+
+        .badges {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            background: rgba(88, 101, 242, 0.1);
+            padding: 10px 18px;
+            border-radius: 8px;
+            color: #ffffff;
+            font-size: 0.9em;
+            border: 1px solid rgba(88, 101, 242, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .badge:hover {
+            background: rgba(88, 101, 242, 0.2);
+            border-color: rgba(88, 101, 242, 0.5);
+        }
+
+        .badge-emoji {
+            font-size: 1.2em;
+        }
+
+        .bio-section {
+            background: #0f0f14;
+            border: 1px solid #2a2a35;
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 32px;
+        }
+
+        .bio-section h3 {
+            color: #ffffff;
+            margin-bottom: 12px;
+            font-size: 1.1em;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .bio-text {
+            color: #b9bbbe;
+            line-height: 1.6;
+            font-size: 1em;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+
+        .stat-card {
+            background: #0f0f14;
+            border: 1px solid #2a2a35;
+            border-radius: 12px;
+            padding: 24px;
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            border-color: #5865F2;
+            transform: translateY(-2px);
+        }
+
+        .stat-label {
+            color: #8e8e9e;
+            font-size: 0.85em;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+        }
+
+        .stat-value {
+            color: #ffffff;
+            font-size: 1.8em;
+            font-weight: 700;
+        }
+
+        .guilds-section {
+            margin-top: 40px;
+        }
+
+        .section-title {
+            color: #ffffff;
+            font-size: 1.5em;
+            margin-bottom: 24px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .guilds-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 16px;
+        }
+
+        .guild-card {
+            background: #0f0f14;
+            border: 1px solid #2a2a35;
+            border-radius: 12px;
+            padding: 20px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .guild-card:hover {
+            border-color: #5865F2;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(88, 101, 242, 0.2);
+        }
+
+        .guild-icon {
+            width: 64px;
+            height: 64px;
+            border-radius: 16px;
+            margin-bottom: 16px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .guild-name {
+            color: #ffffff;
+            font-size: 1.1em;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .guild-id {
+            color: #6b6b7a;
+            font-size: 0.85em;
+            font-family: 'SF Mono', 'Monaco', monospace;
+        }
+
+        .feature-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 14px;
+            border-radius: 8px;
+            font-size: 0.85em;
+            font-weight: 600;
+            border: 1px solid;
+        }
+
+        .noprefix-indicator {
+            background: rgba(59, 165, 93, 0.1);
+            border-color: rgba(59, 165, 93, 0.3);
+            color: #3ba55d;
+        }
+
+        .blacklisted-indicator {
+            background: rgba(237, 66, 69, 0.1);
+            border-color: rgba(237, 66, 69, 0.3);
+            color: #ed4245;
+        }
+
+        .bot-indicator {
+            background: rgba(88, 101, 242, 0.1);
+            border-color: rgba(88, 101, 242, 0.3);
+            color: #5865F2;
+        }
+
+        .premium-indicator {
+            background: linear-gradient(135deg, rgba(255, 115, 250, 0.1), rgba(138, 43, 226, 0.1));
+            border-color: rgba(255, 115, 250, 0.3);
+            color: #ff73fa;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8em;
+            }
+
+            .search-box {
+                flex-direction: column;
+            }
+
+            .profile-content {
+                padding: 0 24px 24px;
+            }
+
+            .avatar-section {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .avatar {
+                width: 120px;
+                height: 120px;
+            }
+
+            .username {
+                font-size: 1.6em;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Zeon Bot Profile Viewer</h1>
+            <p>Advanced Discord Profile Analytics</p>
+        </div>
+
+        <div class="search-section">
+            <div class="search-box">
+                <input type="text" id="userIdInput" placeholder="Enter Discord User ID">
+                <button onclick="searchUser()">Search Profile</button>
+            </div>
+            <div class="quick-examples">
+                <span>Quick access:</span>
+                <button class="example-btn" onclick="loadExample('832622376063336498')">Owner Profile</button>
+                <button class="example-btn" onclick="loadExample('1270759337916104708')">Example User</button>
+            </div>
+        </div>
+
+        <div id="content"></div>
+    </div>
+
+    <script>
+        const API_BASE = 'https://zeonbot.onrender.com/api/v1';
+
+        function loadExample(userId) {
+            document.getElementById('userIdInput').value = userId;
+            searchUser();
+        }
+
+        async function searchUser() {
+            const userId = document.getElementById('userIdInput').value.trim();
+            const content = document.getElementById('content');
+
+            if (!userId) {
+                content.innerHTML = '<div class="error">Please enter a Discord User ID</div>';
+                return;
+            }
+
+            content.innerHTML = '<div class="loading">Loading profile data</div>';
+
+            try {
+                const response = await fetch(`${API_BASE}/users/${userId}`);
+                
+                if (!response.ok) {
+                    throw new Error('User not found or API error');
+                }
+
+                const data = await response.json();
+                displayProfile(data);
+            } catch (error) {
+                content.innerHTML = `<div class="error">❌ ${error.message}. Please verify the User ID and try again.</div>`;
+            }
+        }
+
+        function parseEmoji(emoji) {
+            // If it's a custom Discord emoji format like <:name:id> or <a:name:id>
+            const customEmojiMatch = emoji.match(/<a?:(\w+):(\d+)>/);
+            if (customEmojiMatch) {
+                const [, name, id] = customEmojiMatch;
+                const isAnimated = emoji.startsWith('<a:');
+                const extension = isAnimated ? 'gif' : 'png';
+                return `<img src="https://cdn.discordapp.com/emojis/${id}.${extension}" alt="${name}" style="width: 20px; height: 20px; vertical-align: middle;">`;
+            }
+            // Return as is if it's a unicode emoji
+            return emoji;
+        }
+
+        function displayProfile(data) {
+            const statusClass = {
+                'online': 'status-online',
+                'idle': 'status-idle',
+                'dnd': 'status-dnd',
+                'offline': 'status-offline'
+            };
+
+            const badges = data.badges.map(badge => 
+                `<div class="badge">
+                    <span class="badge-emoji">${parseEmoji(badge.emoji)}</span>
+                    <span>${badge.display_name}</span>
+                </div>`
+            ).join('');
+
+            const bioSection = data.bio ? 
+                `<div class="bio-section">
+                    <h3><span>📝</span> Biography</h3>
+                    <div class="bio-text">${data.bio}</div>
+                </div>` : '';
+
+            const noprefixTag = data.noprefix && data.noprefix.enabled ? 
+                `<span class="feature-tag noprefix-indicator">
+                    <span>⚡</span>
+                    <span>No Prefix ${data.noprefix.is_permanent ? '(Permanent)' : '(Active)'}</span>
+                </span>` : '';
+
+            const blacklistedTag = data.is_blacklisted ? 
+                `<span class="feature-tag blacklisted-indicator">
+                    <span>⚠️</span>
+                    <span>Blacklisted</span>
+                </span>` : '';
+
+            const botTag = data.is_bot ? 
+                `<span class="feature-tag bot-indicator">
+                    <span>🤖</span>
+                    <span>Bot Account</span>
+                </span>` : '';
+
+            const voteInfo = data.vote_info ? 
+                `<div class="stat-card">
+                    <div class="stat-label">Total Votes</div>
+                    <div class="stat-value">${data.vote_info.total_votes}</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Vote Status</div>
+                    <div class="stat-value">${data.vote_info.has_active_vote ? '✅ Active' : '❌ Inactive'}</div>
+                </div>` : '';
+
+            const guilds = data.mutual_guilds.map(guild => 
+                `<div class="guild-card">
+                    <img src="${guild.icon_url || 'https://cdn.discordapp.com/embed/avatars/0.png'}" 
+                         alt="${guild.name}" class="guild-icon">
+                    <div class="guild-name">${guild.name}</div>
+                    <div class="guild-id">ID: ${guild.id}</div>
+                </div>`
+            ).join('');
+
+            const html = `
+                <div class="profile-card">
+                    <div class="profile-banner" style="${data.banner_url ? `background-image: url('${data.banner_url}'); background-size: cover; background-position: center;` : ''}"></div>
+                    
+                    <div class="profile-content">
+                        <div class="avatar-section">
+                            <div class="avatar-wrapper">
+                                <img src="${data.avatar_url}" alt="${data.name}" class="avatar">
+                                <div class="status-indicator ${statusClass['online']}"></div>
+                            </div>
+                            <div class="user-info">
+                                <div class="username">${data.global_name || data.name}</div>
+                                <div class="user-id">@${data.name}${data.discriminator !== '0' ? '#' + data.discriminator : ''} • ${data.id}</div>
+                                <div class="badges">
+                                    ${badges}
+                                    ${noprefixTag}
+                                    ${blacklistedTag}
+                                    ${botTag}
+                                </div>
+                            </div>
+                        </div>
+
+                        ${bioSection}
+
+                        <div class="stats-grid">
+                            <div class="stat-card">
+                                <div class="stat-label">Mutual Servers</div>
+                                <div class="stat-value">${data.mutual_guilds_count}</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-label">Account Created</div>
+                                <div class="stat-value">${new Date(data.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</div>
+                            </div>
+                            ${voteInfo}
+                        </div>
+
+                        ${data.mutual_guilds.length > 0 ? `
+                            <div class="guilds-section">
+                                <h2 class="section-title">
+                                    <span>🏰</span>
+                                    <span>Mutual Servers (${data.mutual_guilds_count})</span>
+                                </h2>
+                                <div class="guilds-grid">
+                                    ${guilds}
+                                </div>
+                            </div>
+                        ` : ''}
+                    </div>
+                </div>
+            `;
+
+            document.getElementById('content').innerHTML = html;
+        }
+
+        document.getElementById('userIdInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                searchUser();
+            }
+        });
+    </script>
+</body>
+</html>
